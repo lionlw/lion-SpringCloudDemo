@@ -1,0 +1,17 @@
+server:
+  port: 8306
+
+spring:
+  application:
+    name: nacos-ribbon-service
+  cloud:
+    nacos:
+      # 将服务注册到nacos
+      discovery:
+        service-name: http://localhost:8848
+        
+service-url:
+  # 配置服务，用于restTemplate调用，其中：
+  # http://表示使用http协议，
+  # USER-SERVICE为user-service项目配置在yml中的应用名，即注册中心中的Application名（不区分大小写），用于服务发现
+  consul-user-service: http://nacos-user-service

@@ -1,0 +1,18 @@
+server:
+  port: 9201
+service-url:
+  user-service: http://localhost:8101
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: hystrix_route
+          uri: ${service-url.user-service}
+          predicates:
+            - Method=GET
+          filters:
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallback-uri: forward:/fallback

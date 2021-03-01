@@ -1,0 +1,41 @@
+server:
+  port: 8401
+
+spring:
+  application:
+    name: sentinel-service
+  cloud:
+    nacos:
+      # 配置Nacos地址
+      server-addr: http://localhost:8848
+    sentinel:
+      transport:
+        # 配置Sentinel dashborad地址
+        dashboard: http://localhost:8080
+        port: 8719
+        # 由于设备有虚拟网卡，会导致sentinel获取到虚拟网卡的ip，会产生一系列问题，此处出于开发需要，写死ip（生产环境不能如此使用）
+        client-ip: 192.168.31.192
+      # 添加Nacos数据源配置
+      datasource:
+        ds1:
+          nacos:
+            server-addr: localhost:8848
+            dataId: ${spring.application.name}-sentinel
+            groupId: DEFAULT_GROUP
+            data-type: json
+            # 持久化规则类型，下述为限流配置
+            rule-type: flow
+
+service-url:
+  user-service: http://nacos-user-service
+
+# 打开sentinel对feign的支持
+feign:
+  sentinel:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

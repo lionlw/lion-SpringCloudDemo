@@ -1,0 +1,16 @@
+server:
+  port: 9101
+
+spring:
+  application:
+    name: consul-config-client
+  # 启用的是dev环境的配置
+  profiles:
+    active: dev
+  cloud:
+    consul:
+      # 将服务注册到consul
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}

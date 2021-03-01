@@ -1,0 +1,30 @@
+server:
+  port: 9201
+service-url:
+  user-service: http://localhost:8101
+
+spring:
+  redis:
+    host: 192.168.2.121
+    password: 123456
+    port: 6379
+  cloud:
+    gateway:
+      routes:
+        - id: requestratelimiter_route
+          uri: http://localhost:8101
+          filters:
+            - name: RequestRateLimiter
+              args:
+                # 每秒允许处理的请求数量
+                redis-rate-limiter.replenishRate: 1
+                # 每秒最大处理的请求数量
+                redis-rate-limiter.burstCapacity: 2
+                # 限流策略，对应策略的Bean（此处为按ip限流：RedisRateLimiterConfig.ipKeyResolver）
+                key-resolver: "#{@ipKeyResolver}"
+          predicates:
+            - Method=GET
+
+logging:
+  level:
+    org.springframework.cloud.gateway: debug

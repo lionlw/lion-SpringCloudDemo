@@ -1,0 +1,25 @@
+# 单注册中心配置
+
+# 指定运行端口
+server:
+  port: 8001
+
+# 指定服务名称
+spring:
+  application:
+    name: eureka-server
+
+# 指定主机地址
+eureka:
+  server:
+    # 开发环境关闭自我保护模式
+    enable-self-preservation: false
+  instance:
+    hostname: localhost
+  client:
+    # 指定是否从注册中心获取服务(注册中心不需要开启)
+    fetch-registry: false
+    # 指定是否将服务注册到注册中心(注册中心不需要开启)
+    register-with-eureka: false
+#    service-url:
+      #defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7003.com:7003/eureka/    #设置EurekaServer集群中的其他地址

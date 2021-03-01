@@ -1,0 +1,14 @@
+server:
+  port: 9101
+
+spring:
+  application:
+    name: nacos-config-client
+  # 启用的是dev环境的配置
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        # # 将服务注册到nacos
+        server-addr: http://localhost:8848

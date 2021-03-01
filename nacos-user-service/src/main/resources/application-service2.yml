@@ -1,0 +1,14 @@
+# 指定运行端口
+server:
+  port: 8107
+
+# 指定服务名称
+spring:
+  application:
+    # 当做服务名称,不区分大小写
+    name: nacos-user-service
+  cloud:
+    nacos:
+      # 将服务注册到nacos
+      discovery:
+        service-name: http://localhost:8848

@@ -1,0 +1,10 @@
+# 对nacos的配置中心功能进行配置（必须在此文件中配置）
+
+spring:
+  cloud:
+    nacos:
+      config:
+        # Nacos地址
+        server-addr: http://localhost:8848
+        # 这里我们获取的yaml格式的配置
+        file-extension: yaml

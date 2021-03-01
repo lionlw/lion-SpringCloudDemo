@@ -1,0 +1,24 @@
+# 集群注册中心配置
+
+# 指定运行端口
+server:
+  port: 8002
+
+# 指定服务名称
+spring:
+  application:
+    name: eureka-server
+
+# 指定主机地址
+eureka:
+  server:
+    # 开发环境关闭自我保护模式
+    enable-self-preservation: false
+  instance:
+    hostname: replica1
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      # 注册到另一个Eureka注册中心
+      defaultZone: http://127.0.0.1:8003/eureka/    #设置EurekaServer集群中的其他地址，","间隔

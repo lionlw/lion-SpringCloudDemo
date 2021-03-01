@@ -1,0 +1,25 @@
+server:
+  port: 9201
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: prefixpath_route
+          #此处需要使用lb协议
+          uri: lb://user-service 
+          predicates:
+            - Method=GET
+          filters:
+            - PrefixPath=/user
+      discovery:
+        locator:
+          enabled: true
+eureka:
+  client:
+    service-url: 
+      defaultZone: http://localhost:8001/eureka/
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
